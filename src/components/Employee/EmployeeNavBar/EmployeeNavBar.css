@@ -1,0 +1,13 @@
+.navbar {
+    margin: 1rem;
+    padding: 1rem;
+    background-color: #7AB2D3;
+}
+
+.brand {
+    padding-left: 5rem;
+}
+
+.logout {
+    margin-right: 5rem;
+}
