@@ -8,8 +8,8 @@ const User = () => {
         <Router>
             <UserNavBar />
             <Routes>
-                <Route exact path='/api/v1/user/login' element={<UserLogin />} />
-                <Route exact path='/api/v1/user/signup' element={<UserSignUp />} />
+                <Route exact path='/login' element={<UserLogin />} />
+                <Route exact path='/signup' element={<UserSignUp />} />
             </Routes>
         </Router>
     );

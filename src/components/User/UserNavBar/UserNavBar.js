@@ -11,12 +11,12 @@ function UserNavBar() {
                 </Navbar.Brand>
             </LinkContainer>
             <Nav className='navlinks'>
-                <LinkContainer to="/api/v1/user/login">
+                <LinkContainer to="/login">
                     <Nav.Link className='login'>
                         Login
                     </Nav.Link>
                 </LinkContainer>
-                <LinkContainer to="/api/v1/user/signup">
+                <LinkContainer to="/signup">
                     <Nav.Link className='signup'>
                         SignUp
                     </Nav.Link>

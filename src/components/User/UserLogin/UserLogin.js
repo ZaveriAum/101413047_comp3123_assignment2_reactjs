@@ -8,7 +8,7 @@ const UserLogin = () => {
     return (
         <div className="login-page">
             <div className="login-box">
-                <h2 className="login-title">Login</h2>
+                <h2 className="login-title">Welcome Back</h2>
 
                 <div className="input-group">
                     <img src={emailIcon} alt="Email Icon" className="input-icon" />
@@ -28,7 +28,7 @@ const UserLogin = () => {
                     />
                 </div>
 
-                <button className="login-button">Login</button>
+                <button className="login-button">Continue</button>
             </div>
         </div>
     );
