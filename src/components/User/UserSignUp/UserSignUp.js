@@ -5,7 +5,6 @@ import passwordIcon from '../../../assets/lock-fill.svg';
 import userIcon from '../../../assets/person-circle.svg';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import 'react-toastify/dist/ReactToastify.css';
 
 const UserSignUp = () => {
     const navigate = useNavigate();
