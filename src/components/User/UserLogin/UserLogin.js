@@ -13,8 +13,8 @@ const UserLogin = () => {
                 <div className="input-group">
                     <img src={emailIcon} alt="Email Icon" className="input-icon" />
                     <input
-                        type="text"
-                        placeholder="Username"
+                        type="Email"
+                        placeholder="Email"
                         className="input-field"
                     />
                 </div>
