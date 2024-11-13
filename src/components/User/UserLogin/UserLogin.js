@@ -38,35 +38,37 @@ const UserLogin = () => {
     };
 
     return (
-        <div className="login-page">
-            <div className="login-box">
-                <h2 className="login-title">Welcome Back</h2>
+        <>
+            <div className="login-page">
+                <div className="login-box">
+                    <h2 className="login-title">Welcome Back</h2>
 
-                <div className="input-group">
-                    <img src={emailIcon} alt="Email Icon" className="input-icon" />
-                    <input
-                        name="email"
-                        type="email"
-                        placeholder="Email"
-                        className="input-field"
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
+                    <div className="input-group">
+                        <img src={emailIcon} alt="Email Icon" className="input-icon" />
+                        <input
+                            name="email"
+                            type="email"
+                            placeholder="Email"
+                            className="input-field"
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                    </div>
+
+                    <div className="input-group">
+                        <img src={passwordIcon} alt="Password Icon" className="input-icon" />
+                        <input
+                            name="password"
+                            type="password"
+                            placeholder="Password"
+                            className="input-field"
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                    </div>
+
+                    <button className="login-button" onClick={handleLogin}>Continue</button>
                 </div>
-
-                <div className="input-group">
-                    <img src={passwordIcon} alt="Password Icon" className="input-icon" />
-                    <input
-                        name="password"
-                        type="password"
-                        placeholder="Password"
-                        className="input-field"
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                </div>
-
-                <button className="login-button" onClick={handleLogin}>Continue</button>
             </div>
-        </div>
+        </>
     );
 }
 

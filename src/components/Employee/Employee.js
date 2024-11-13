@@ -3,7 +3,7 @@ import EmployeeNavBar from "./EmployeeNavBar/EmployeeNavBar";
 const Employee = () => {
     return (
         <>
-            <EmployeeNavBar />
+            <p>List of all employees</p>
         </>
     );
 }

@@ -39,48 +39,50 @@ const UserSignUp = () => {
     };
 
     return (
-        <div className="signup-page">
-            <div className="signup-box">
-                <h2 className="signup-title">Create your account</h2>
+        <>
+            <div className="signup-page">
+                <div className="signup-box">
+                    <h2 className="signup-title">Create your account</h2>
 
-                <div className="input-group">
-                    <img src={userIcon} alt="User Icon" className="input-icon" />
-                    <input
-                        name="name"
-                        type="text"
-                        placeholder="Username"
-                        className="input-field"
-                        onChange={(e) => setName(e.target.value)}
-                    />
+                    <div className="input-group">
+                        <img src={userIcon} alt="User Icon" className="input-icon" />
+                        <input
+                            name="name"
+                            type="text"
+                            placeholder="Username"
+                            className="input-field"
+                            onChange={(e) => setName(e.target.value)}
+                        />
+                    </div>
+
+                    <div className="input-group">
+                        <img src={emailIcon} alt="Email Icon" className="input-icon" />
+                        <input
+                            name="email"
+                            type="email"
+                            placeholder="Email"
+                            className="input-field"
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                    </div>
+
+                    <div className="input-group">
+                        <img src={passwordIcon} alt="Password Icon" className="input-icon" />
+                        <input
+                            name="password"
+                            type="password"
+                            placeholder="Password"
+                            className="input-field"
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                    </div>
+
+                    <button className="login-button" onClick={handleSignUp}>
+                        Continue
+                    </button>
                 </div>
-
-                <div className="input-group">
-                    <img src={emailIcon} alt="Email Icon" className="input-icon" />
-                    <input
-                        name="email"
-                        type="email"
-                        placeholder="Email"
-                        className="input-field"
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                </div>
-
-                <div className="input-group">
-                    <img src={passwordIcon} alt="Password Icon" className="input-icon" />
-                    <input
-                        name="password"
-                        type="password"
-                        placeholder="Password"
-                        className="input-field"
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                </div>
-
-                <button className="login-button" onClick={handleSignUp}>
-                    Continue
-                </button>
             </div>
-        </div>
+        </>
     );
 };
 
