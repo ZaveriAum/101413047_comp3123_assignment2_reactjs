@@ -1,0 +1,22 @@
+* {}
+
+.navbar {
+    margin: 1rem;
+    padding: 1rem;
+    background-color: #E4E0E1;
+}
+
+.brand {
+    padding-left: 5rem;
+    background-color: #E4E0E1;
+}
+
+.login,
+.signup {
+    margin-right: 5rem;
+    background-color: #E4E0E1;
+}
+
+.navlinks {
+    background-color: #E4E0E1;
+}

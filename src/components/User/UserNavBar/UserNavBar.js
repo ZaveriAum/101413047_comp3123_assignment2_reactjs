@@ -1,5 +1,6 @@
 import { Navbar, Nav } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
+import './UserNavBar.css'
 
 function UserNavBar() {
     return (
@@ -9,14 +10,14 @@ function UserNavBar() {
                     Emage
                 </Navbar.Brand>
             </LinkContainer>
-            <Nav>
-                <LinkContainer to="/api/v1/login">
-                    <Nav.Link className='logout'>
+            <Nav className='navlinks'>
+                <LinkContainer to="/api/v1/user/login">
+                    <Nav.Link className='login'>
                         Login
                     </Nav.Link>
                 </LinkContainer>
-                <LinkContainer to="/api/v1/signup">
-                    <Nav.Link className='logout'>
+                <LinkContainer to="/api/v1/user/signup">
+                    <Nav.Link className='signup'>
                         SignUp
                     </Nav.Link>
                 </LinkContainer>
