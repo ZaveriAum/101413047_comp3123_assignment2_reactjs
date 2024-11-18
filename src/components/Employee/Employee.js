@@ -1,105 +1,57 @@
-import { useState, useEffect } from 'react';
-import { Button, Card, Modal, Form, InputGroup } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import { Button, Card, InputGroup, Form } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faTrash, faMagnifyingGlass, faSquarePlus } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
-import EmployeeService from '../../service/EmployeeService'
+import EmployeeService from '../../service/EmployeeService';
+import EmployeeDetailsModal from './EmployeeDetails/EmployeeDetails';
+import EmployeeDeleteModal from './EmployeeDelete/EmployeeDelete';
 
 const Employee = () => {
-
   const navigate = useNavigate();
   const [employee, setEmployee] = useState([]);
-  const [query, setQuery] = useState()
+  const [query, setQuery] = useState();
   const [selectedDetailsEmployee, setSelectedDetailsEmployee] = useState(null);
   const [modalDetailsShow, setModalDetailsShow] = useState(false);
   const [selectedDeleteEmployee, setSelectedDeleteEmployee] = useState(null);
   const [modalDeleteShow, setModalDeleteShow] = useState(false);
 
   useEffect(() => {
-    EmployeeService.getEmployees().then((res)=>{
-        setEmployee(res.data.employees)
-    }).catch((e) => console.log(e));
+    EmployeeService.getEmployees()
+      .then((res) => {
+        setEmployee(res.data.employees);
+      })
+      .catch((e) => console.log(e));
   }, []);
 
-  const search = (e)=>{
+  const search = (e) => {
     e.preventDefault();
-    EmployeeService.searchEmployees(query).then((res)=>{
-        setEmployee(res.data.employees)
-    }).catch((e) => console.log(e));
-  }
-
-  const EmployeeDetailsModal = ({ employee, show, onHide }) => {
-    if (!employee) return null;
-
-    return (
-      <Modal size="lg" aria-labelledby="contained-modal-title-vcenter" centered show={show} onHide={onHide}>
-        <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-            {employee.first_name} {employee.last_name}
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <p><strong>Email:</strong> {employee.email}</p>
-          <p><strong>Position:</strong> {employee.position}</p>
-          <p><strong>Department:</strong> {employee.department}</p>
-          <p><strong>Joining Date:</strong> {new Date(employee.date_of_joining).toLocaleDateString()}</p>
-          <p><strong>Created:</strong> {new Date(employee.created_at).toLocaleDateString()}</p>
-          <p><strong>Updated:</strong> {new Date(employee.updated_at).toLocaleDateString()}</p>
-          <p><strong>Salary:</strong> ${employee.salary}</p>
-        </Modal.Body>
-      </Modal>
-    );
+    EmployeeService.searchEmployees(query)
+      .then((res) => {
+        setEmployee(res.data.employees);
+      })
+      .catch((e) => console.log(e));
   };
 
-  const EmployeeDeleteModal = ({ employee, show, onHide }) => {
-    if (!employee) return null;
-
-    return (
-      <Modal size="lg" aria-labelledby="contained-modal-title-vcenter" centered show={show} onHide={onHide}>
-        <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-            Are you sure you want to delete this employee?
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <p><strong>Name: </strong>{employee.first_name} {employee.last_name}</p>
-          <p><strong>Email:</strong> {employee.email}</p>
-          <p><strong>Position:</strong> {employee.position}</p>
-          <p><strong>Department:</strong> {employee.department}</p>
-          <p><strong>Joining Date:</strong> {new Date(employee.date_of_joining).toLocaleDateString()}</p>
-          <p><strong>Created:</strong> {new Date(employee.created_at).toLocaleDateString()}</p>
-          <p><strong>Updated:</strong> {new Date(employee.updated_at).toLocaleDateString()}</p>
-          <p><strong>Salary:</strong> ${employee.salary}</p>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="danger" onClick={(e) => 
-            {
-                e.stopPropagation();
-                EmployeeService.deleteEmployee(employee._id).then((res)=>{
-                    setModalDeleteShow(false);
-                    EmployeeService.getEmployees().then((res)=>{
-                        setEmployee(res.data.employees)
-                    }).catch(e=>console.log(e))
-                }).catch(e=>console.log(e))
-            }
-          }>Delete</Button>
-        </Modal.Footer>
-      </Modal>
-    );
+  const refreshEmployeeList = () => {
+    EmployeeService.getEmployees()
+      .then((res) => {
+        setEmployee(res.data.employees);
+      })
+      .catch((e) => console.log(e));
   };
 
   return (
     <div className="empBody">
-        <Button onClick={(e)=>
-            {
-                e.stopPropagation();
-                navigate(`/employees/create`)
-            }
-                }><FontAwesomeIcon icon={faSquarePlus} /></Button>
-        <InputGroup name="query" type="query" onChange={(e) => setQuery(e.target.value)}>
-            <Form.Control type="text"/>
-            <Button onClick={(e) => search(e)}><InputGroup.Text><FontAwesomeIcon icon={faMagnifyingGlass} /></InputGroup.Text></Button>
-        </InputGroup>
+      <Button onClick={() => navigate(`/employees/create`)}>
+        <FontAwesomeIcon icon={faSquarePlus} />
+      </Button>
+      <InputGroup>
+        <Form.Control type="text" onChange={(e) => setQuery(e.target.value)} />
+        <Button onClick={(e) => search(e)}>
+          <FontAwesomeIcon icon={faMagnifyingGlass} />
+        </Button>
+      </InputGroup>
       {employee.map((emp) => (
         <Card
           key={emp._id}
@@ -115,19 +67,24 @@ const Employee = () => {
             </Card.Title>
             <Card.Subtitle className="mb-2 text-muted">{emp.position}</Card.Subtitle>
             <Card.Subtitle className="mb-2 text-muted">{emp.department}</Card.Subtitle>
-            <Button variant="primary" className="me-2" onClick={(e)=>
-            {
+            <Button
+              variant="primary"
+              className="me-2"
+              onClick={(e) => {
                 e.stopPropagation();
-                navigate(`/employees/${emp._id}`)
-            }
-                }>
+                navigate(`/employees/${emp._id}`);
+              }}
+            >
               <FontAwesomeIcon icon={faPenToSquare} />
             </Button>
-            <Button variant="danger" onClick={(e)=>{
+            <Button
+              variant="danger"
+              onClick={(e) => {
                 e.stopPropagation();
                 setSelectedDeleteEmployee(emp);
                 setModalDeleteShow(true);
-            }}>
+              }}
+            >
               <FontAwesomeIcon icon={faTrash} />
             </Button>
           </Card.Body>
@@ -139,9 +96,10 @@ const Employee = () => {
         onHide={() => setModalDetailsShow(false)}
       />
       <EmployeeDeleteModal
-      employee={selectedDeleteEmployee}
-      show={modalDeleteShow}
-      onHide={() => setModalDeleteShow(false)}
+        employee={selectedDeleteEmployee}
+        show={modalDeleteShow}
+        onHide={() => setModalDeleteShow(false)}
+        onEmployeeDeleted={refreshEmployeeList}
       />
     </div>
   );
