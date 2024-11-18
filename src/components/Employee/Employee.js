@@ -2,7 +2,7 @@ import apiClient from '../../client/apiClient';
 import { useState, useEffect } from 'react';
 import { Button, Card, Modal, Form, InputGroup } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPenToSquare, faTrash, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { faPenToSquare, faTrash, faMagnifyingGlass, faSquarePlus } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 
 const Employee = () => {
@@ -104,6 +104,12 @@ const Employee = () => {
 
   return (
     <div className="empBody">
+        <Button onClick={(e)=>
+            {
+                e.stopPropagation();
+                navigate(`/employees/create`)
+            }
+                }><FontAwesomeIcon icon={faSquarePlus} /></Button>
         <InputGroup name="query" type="query" onChange={(e) => setQuery(e.target.value)}>
             <Form.Control type="text"/>
             <Button onClick={(e) => search(e)}><InputGroup.Text><FontAwesomeIcon icon={faMagnifyingGlass} /></InputGroup.Text></Button>

@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import UserNavBar from './components/User/UserNavBar/UserNavBar'
 import EmployeeNavBar from './components/Employee/EmployeeNavBar/EmployeeNavBar';
 import EmployeeUpdate from './components/Employee/EmployeeUpdate/EmployeeUpdate';
-
+import EmployeeCreate from './components/Employee/EmployeeCreate/EmployeeCreate';
 function App() {
   return (
     <Router>
@@ -16,6 +16,7 @@ function App() {
         <Route exact path='/signup' element={<><UserNavBar /><UserSignUp /></>} />
         <Route exact path='/employees' element={<><EmployeeNavBar /><Employee /> </>} />
         <Route exact path='/employees/:eid' element={<><EmployeeNavBar /><EmployeeUpdate /> </>} />
+        <Route exact path='/employees/create' element={<><EmployeeNavBar /><EmployeeCreate /> </>} />
       </Routes>
     </Router>
   );
