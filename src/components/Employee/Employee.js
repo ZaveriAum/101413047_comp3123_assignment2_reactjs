@@ -3,8 +3,11 @@ import { useState, useEffect } from 'react';
 import { Button, Card, Modal, Form, InputGroup } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faTrash, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
 
 const Employee = () => {
+
+  const navigate = useNavigate();
   const [employee, setEmployee] = useState([]);
   const [query, setQuery] = useState()
   const [selectedEmployee, setSelectedEmployee] = useState(null);
@@ -77,7 +80,7 @@ const Employee = () => {
             </Card.Title>
             <Card.Subtitle className="mb-2 text-muted">{emp.position}</Card.Subtitle>
             <Card.Subtitle className="mb-2 text-muted">{emp.department}</Card.Subtitle>
-            <Button variant="primary" className="me-2">
+            <Button variant="primary" className="me-2" onClick={()=>navigate(`/employees/${emp._id}`)}>
               <FontAwesomeIcon icon={faPenToSquare} />
             </Button>
             <Button variant="danger">

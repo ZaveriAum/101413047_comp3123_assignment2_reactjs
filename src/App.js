@@ -6,6 +6,7 @@ import Employee from './components/Employee/Employee'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import UserNavBar from './components/User/UserNavBar/UserNavBar'
 import EmployeeNavBar from './components/Employee/EmployeeNavBar/EmployeeNavBar';
+import EmployeeUpdate from './components/Employee/EmployeeUpdate/EmployeeUpdate';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route exact path='/login' element={<><UserNavBar /><UserLogin /></>} />
         <Route exact path='/signup' element={<><UserNavBar /><UserSignUp /></>} />
         <Route exact path='/employees' element={<><EmployeeNavBar /><Employee /> </>} />
+        <Route exact path='/employees/:eid' element={<><EmployeeNavBar /><EmployeeUpdate /> </>} />
       </Routes>
     </Router>
   );
