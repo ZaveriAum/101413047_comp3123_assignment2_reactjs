@@ -20,12 +20,12 @@ const EmployeeNavBar = () => {
 
     return (
         <Navbar className="container-fluid justify-content-between navbar" expand="lg">
-            <LinkContainer to='/api/v1/employees'>
+            <LinkContainer className='brand_c' to='/api/v1/employees'>
                 <Navbar.Brand className='brand'>
                     Emage
                 </Navbar.Brand>
             </LinkContainer>
-            <Nav>
+            <Nav className='logt'>
                 <LinkContainer to="/">
                     <Nav.Link onClick={handleLogin} className='logout'>
                         Logout

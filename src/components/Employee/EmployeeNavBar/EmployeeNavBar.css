@@ -1,11 +1,15 @@
 .navbar {
     margin: 1rem;
     padding: 1rem;
-    background-color: #7AB2D3;
+    background-color: #E4E0E1;
 }
 
 .brand {
     padding-left: 5rem;
+}
+
+.logt, .brand_c{
+    background-color: #E4E0E1;
 }
 
 .logout {

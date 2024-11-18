@@ -21,21 +21,16 @@ const UserSignUp = () => {
             password: password
         };
 
-        try {
-            let result = await axios.post('http://localhost:5000/api/v1/user/signup', userData);
-            handleSignUpRes(result.data);
-        } catch (err) {
-            handleSignUpRes(err.response?.data || { message: 'Error occurred' });
-        }
-    };
-
-    const handleSignUpRes = (result) => {
-        if (result.message === 'User created successfully') {
-            alert(result.message)
+        await axios.post('http://localhost:5000/api/v1/user/signup', userData)
+        .then((res)=>{
+            console.log(res)
+            alert(res.user.username + " welcome to Emage")
             navigate('/login');
-        } else {
-            alert(result.message)
-        }
+        })
+        .catch((e)=>{
+            console.log(e)
+            alert("Error: " + e)
+        })
     };
 
     return (

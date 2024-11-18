@@ -19,23 +19,14 @@ const UserLogin = () => {
             password: password
         };
 
-        try {
-            let result = await axios.post('http://localhost:5000/api/v1/user/login', userData);
-            handleLoginRes(result.data);
-        } catch (err) {
-            handleLoginRes(err.response?.data || { message: 'Error occurred' });
-        }
-    };
-
-    const handleLoginRes = (result) => {
-        console.log(result)
-        if (result.message === 'Login successful') {
-            alert(result.message)
-            navigate('/employees');
-        } else {
-            alert(result.message)
-        }
-    };
+            await axios.post('http://localhost:5000/api/v1/user/login', userData)
+            .then((res)=>{
+                alert(res.message)
+                navigate('/employees');
+            })
+            .catch((e)=>{
+                alert(e.message)
+            })};
 
     return (
         <>
