@@ -1,7 +1,8 @@
 import {useState, useEffect} from 'react'
 import { useParams } from 'react-router-dom'
-import apiClient from '../../../client/apiClient'
 import { useNavigate } from 'react-router-dom';
+import EmployeeService from '../../../service/EmployeeService'
+
 
 function EmployeeUpdate() {
 
@@ -17,7 +18,7 @@ function EmployeeUpdate() {
 
 
     const getEmployeeDetails = async ()=>{
-        await apiClient.get(`/api/v1/emp/employees/${eid}`)
+        EmployeeService.getEmployee(eid)
         .then((employee)=>{
             const emp = employee.data.employee
             setFirstName(emp.first_name)
@@ -48,7 +49,7 @@ function EmployeeUpdate() {
             "salary":salary
         }
         console.log(payload)
-        await apiClient.put(`/api/v1/emp/employees/${eid}`, payload)
+        EmployeeService.updateEmployees(eid, payload)
         .then((response)=>{
             alert(response.data.status)
             navigate('/employees')

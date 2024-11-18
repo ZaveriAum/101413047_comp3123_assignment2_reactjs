@@ -1,9 +1,9 @@
-import apiClient from '../../client/apiClient';
 import { useState, useEffect } from 'react';
 import { Button, Card, Modal, Form, InputGroup } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faTrash, faMagnifyingGlass, faSquarePlus } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
+import EmployeeService from '../../service/EmployeeService'
 
 const Employee = () => {
 
@@ -15,36 +15,17 @@ const Employee = () => {
   const [selectedDeleteEmployee, setSelectedDeleteEmployee] = useState(null);
   const [modalDeleteShow, setModalDeleteShow] = useState(false);
 
-  const getEmployees = async () => {    
-    await apiClient
-    .get('/api/v1/emp/employees')
-    .then((emps) => {
-        setEmployee(emps.data.employees);
-    })
-    .catch((e) => console.log(e));
-  };
-
   useEffect(() => {
-    getEmployees();
+    EmployeeService.getEmployees().then((res)=>{
+        setEmployee(res.data.employees)
+    }).catch((e) => console.log(e));
   }, []);
 
-  const search = async (e)=>{
+  const search = (e)=>{
     e.preventDefault();
-    await apiClient
-    .get(`/api/v1/emp/search/${query}`)
-    .then((emps) => {
-        setEmployee(emps.data.employees);
-    })
-    .catch((e) => console.log(e));
-  }
-
-  const deleteEmployee = async (eid)=>{
-    setModalDeleteShow(false);
-    await apiClient
-    .delete(`/api/v1/emp/employees?eid=${eid}`)
-    .then((res)=>{
-        getEmployees();
-    }).catch(e=>console.log(e))
+    EmployeeService.searchEmployees(query).then((res)=>{
+        setEmployee(res.data.employees)
+    }).catch((e) => console.log(e));
   }
 
   const EmployeeDetailsModal = ({ employee, show, onHide }) => {
@@ -94,7 +75,12 @@ const Employee = () => {
           <Button variant="danger" onClick={(e) => 
             {
                 e.stopPropagation();
-                deleteEmployee(employee._id)
+                EmployeeService.deleteEmployee(employee._id).then((res)=>{
+                    setModalDeleteShow(false);
+                    EmployeeService.getEmployees().then((res)=>{
+                        setEmployee(res.data.employees)
+                    }).catch(e=>console.log(e))
+                }).catch(e=>console.log(e))
             }
           }>Delete</Button>
         </Modal.Footer>

@@ -1,6 +1,6 @@
 import {useState} from 'react'
-import apiClient from '../../../client/apiClient'
 import {useNavigate} from 'react-router-dom'
+import EmployeeService from '../../../service/EmployeeService'
 
 const EmployeeCreate = ()=>{
 
@@ -25,13 +25,8 @@ const EmployeeCreate = ()=>{
             "department":department,
             "salary":salary
         }
-        console.log(payload)
-        await apiClient.post(`/api/v1/emp/employees`, payload)
-        .then((response)=>{
-            alert(response.data.status)
-            navigate('/employees')
-        })
-        .catch(e=>alert(e.status))
+        EmployeeService.createEmployees(payload).then((res)=>alert(res.data.status)).catch(e=>alert(e.data.status))
+        navigate('/employees')       
     }
 
   return (
