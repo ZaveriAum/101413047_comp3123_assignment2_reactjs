@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import EmployeeService from '../../service/EmployeeService';
 import EmployeeDetailsModal from './EmployeeDetails/EmployeeDetails';
 import EmployeeDeleteModal from './EmployeeDelete/EmployeeDelete';
+import './Employee.css';
 
 const Employee = () => {
   const navigate = useNavigate();
@@ -43,53 +44,63 @@ const Employee = () => {
 
   return (
     <div className="empBody">
-      <Button onClick={() => navigate(`/employees/create`)}>
-        <FontAwesomeIcon icon={faSquarePlus} />
-      </Button>
-      <InputGroup>
-        <Form.Control type="text" onChange={(e) => setQuery(e.target.value)} />
-        <Button onClick={(e) => search(e)}>
-          <FontAwesomeIcon icon={faMagnifyingGlass} />
+      <div className="search-container">
+        <Button onClick={() => navigate(`/employees/create`)} className="btn-add">
+          <FontAwesomeIcon className="add-icon" icon={faSquarePlus} />
         </Button>
-      </InputGroup>
-      {employee.map((emp) => (
-        <Card
-          key={emp._id}
-          style={{ width: '18rem', cursor: 'pointer', marginBottom: '10px' }}
-          onClick={() => {
-            setSelectedDetailsEmployee(emp);
-            setModalDetailsShow(true);
-          }}
-        >
-          <Card.Body>
-            <Card.Title>
-              {emp.first_name} {emp.last_name}
-            </Card.Title>
-            <Card.Subtitle className="mb-2 text-muted">{emp.position}</Card.Subtitle>
-            <Card.Subtitle className="mb-2 text-muted">{emp.department}</Card.Subtitle>
-            <Button
-              variant="primary"
-              className="me-2"
-              onClick={(e) => {
-                e.stopPropagation();
-                navigate(`/employees/${emp._id}`);
-              }}
-            >
-              <FontAwesomeIcon icon={faPenToSquare} />
-            </Button>
-            <Button
-              variant="danger"
-              onClick={(e) => {
-                e.stopPropagation();
-                setSelectedDeleteEmployee(emp);
-                setModalDeleteShow(true);
-              }}
-            >
-              <FontAwesomeIcon icon={faTrash} />
-            </Button>
-          </Card.Body>
-        </Card>
-      ))}
+        <InputGroup className="search-group">
+          <Form.Control
+            type="text"
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Search employees..."
+            className="search-input"
+          />
+          <Button onClick={(e) => search(e)} className="btn-search">
+            <FontAwesomeIcon className="search-icon" icon={faMagnifyingGlass} />
+          </Button>
+        </InputGroup>
+      </div>
+      <div className="employee-cards">
+        {employee.map((emp) => (
+          <Card
+            key={emp._id}
+            className="employee-card"
+            onClick={() => {
+              setSelectedDetailsEmployee(emp);
+              setModalDetailsShow(true);
+            }}
+          >
+            <Card.Body className="emp-body">
+              <Card.Title className="employee-name">
+                {emp.first_name} {emp.last_name}
+              </Card.Title>
+              <Card.Subtitle className="employee-position">{emp.position}</Card.Subtitle>
+              <Card.Subtitle className="employee-department">{emp.department}</Card.Subtitle>
+              <Button
+                variant="primary"
+                className="me-2 btn-edit"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  navigate(`/employees/${emp._id}`);
+                }}
+              >
+                <FontAwesomeIcon className='edit-icon' icon={faPenToSquare} />
+              </Button>
+              <Button
+                variant="danger"
+                className="btn-delete"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setSelectedDeleteEmployee(emp);
+                  setModalDeleteShow(true);
+                }}
+              >
+                <FontAwesomeIcon className='delete-icon' icon={faTrash} />
+              </Button>
+            </Card.Body>
+          </Card>
+        ))}
+      </div>
       <EmployeeDetailsModal
         employee={selectedDetailsEmployee}
         show={modalDetailsShow}
