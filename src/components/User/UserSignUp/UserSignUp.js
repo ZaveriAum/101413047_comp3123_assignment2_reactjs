@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './UserSignUp.css';
+import styles from './UserSignUp.module.css';
 import emailIcon from '../../../assets/envelope-fill.svg';
 import passwordIcon from '../../../assets/lock-fill.svg';
 import userIcon from '../../../assets/person-circle.svg';
@@ -77,48 +77,52 @@ const UserSignUp = () => {
     }
     return (
         <>
-            <div className="signup-page">
+            <div className={styles.signupPage}>
             
-                <div className="signup-box">
-                    <h2 className="signup-title">Create your account</h2>
+                <div className={styles.signupBox}>
+                    <h2 className={styles.signupTitle}>Create your account</h2>
 
-                    <div className="input-group">
-                        <img src={userIcon} alt="User Icon" className="input-icon" />
+                    <div className={styles.inputGroup}>
+                        <img src={userIcon} alt="User Icon" className={styles.inputIcon} />
                         <input
+                            required
                             name="name"
                             type="text"
                             placeholder="Username"
-                            className="input-field"
+                            className={styles.inputField}
                             onChange={(e) => setName(e.target.value)}
                         />
                     </div>
 
-                    <div className="input-group">
-                        <img src={emailIcon} alt="Email Icon" className="input-icon" />
+                    <div className={styles.inputGroup}>
+                        <img src={emailIcon} alt="Email Icon" className={styles.inputIcon} />
                         <input
+                            required
                             name="email"
                             type="email"
                             placeholder="Email"
-                            className="input-field"
+                            className={styles.inputField}
                             onChange={(e) => setEmail(e.target.value)}
                         />
                     </div>
 
-                    <div className="input-group">
-                        <img src={passwordIcon} alt="Password Icon" className="input-icon" />
+                    <div className={styles.inputGroup}>
+                        <img src={passwordIcon} alt="Password Icon" className={styles.inputIcon} />
                         <input
+                            required
                             name="password"
                             type="password"
                             placeholder="Password"
-                            className="input-field"
+                            className={styles.inputField}
                             onChange={(e) => setPassword(e.target.value)}
                         />
                     </div>
 
-                    <button className="login-button" onClick={handleSignUp}>
+                    <button className={styles.signupButton} onClick={handleSignUp}>
                         Continue
                     </button>
                 </div>
+                
             </div>
             <CusAlert
                 type={alert.type}

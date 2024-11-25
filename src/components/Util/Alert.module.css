@@ -1,0 +1,11 @@
+.alertbody, .alertheading, .alertmessage{
+    background-color: #f8d7da;
+}
+
+.alertbody{
+    width: 400px;
+    bottom: 700px;
+    left: 1100px;
+    position: absolute;
+    background-color: #f8d7da;
+}
