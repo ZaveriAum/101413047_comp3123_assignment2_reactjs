@@ -8,10 +8,12 @@ import UserNavBar from './components/User/UserNavBar/UserNavBar'
 import EmployeeNavBar from './components/Employee/EmployeeNavBar/EmployeeNavBar';
 import EmployeeUpdate from './components/Employee/EmployeeUpdate/EmployeeUpdate';
 import EmployeeCreate from './components/Employee/EmployeeCreate/EmployeeCreate';
+import Home from './components/Util/Home';
 function App() {
   return (
     <Router>
       <Routes>
+        <Route exact path='/' element={<><UserNavBar /><Home /></>} />
         <Route exact path='/login' element={<><UserNavBar /><UserLogin /></>} />
         <Route exact path='/signup' element={<><UserNavBar /><UserSignUp /></>} />
         <Route exact path='/employees' element={<><EmployeeNavBar /><Employee /> </>} />

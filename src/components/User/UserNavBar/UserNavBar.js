@@ -7,7 +7,7 @@ function UserNavBar() {
         <Navbar className="container-fluid justify-content-between navbar" expand="lg">
             <LinkContainer to='/'>
                 <Navbar.Brand className='brand'>
-                    Emage
+                    EmagePro
                 </Navbar.Brand>
             </LinkContainer>
             <Nav className='navlinks'>

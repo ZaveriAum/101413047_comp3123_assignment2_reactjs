@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import EmployeeService from '../../service/EmployeeService';
 import EmployeeDetailsModal from './EmployeeDetails/EmployeeDetails';
 import EmployeeDeleteModal from './EmployeeDelete/EmployeeDelete';
-import './Employee.css';
+import styles from './Employee.module.css';
 
 const Employee = () => {
   const navigate = useNavigate();
@@ -43,61 +43,60 @@ const Employee = () => {
   };
 
   return (
-    <div className="empBody">
-      <div className="search-container">
-        <Button onClick={() => navigate(`/employees/create`)} className="btn-add">
-          <FontAwesomeIcon className="add-icon" icon={faSquarePlus} />
+    <div className={styles.empBody}>
+      <h1 className={styles.heading}>User Dashboard</h1>
+      <div className={styles.searchContainer}>
+        <Button onClick={() => navigate(`/employees/create`)} className={styles.btnAdd}>
+          <FontAwesomeIcon className={styles.addIcon} icon={faSquarePlus} />
         </Button>
-        <InputGroup className="search-group">
+        <InputGroup className={styles.searchGroup}>
           <Form.Control
             type="text"
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search employees..."
-            className="search-input"
+            className={styles.searchInput}
           />
-          <Button onClick={(e) => search(e)} className="btn-search">
-            <FontAwesomeIcon className="search-icon" icon={faMagnifyingGlass} />
+          <Button onClick={(e) => search(e)} className={styles.btnSearch}>
+            <FontAwesomeIcon className={styles.searchIcon} icon={faMagnifyingGlass} />
           </Button>
         </InputGroup>
       </div>
-      <div className="employee-cards">
+      <div className={styles.employeeCards}>
         {employee.map((emp) => (
           <Card
             key={emp._id}
-            className="employee-card"
+            className={styles.employeeCard}
             onClick={() => {
               setSelectedDetailsEmployee(emp);
               setModalDetailsShow(true);
             }}
-          >
-            <Card.Img variant="top" src="https://100k-faces.glitch.me/random-image" />
-            
-            <Card.Body className="emp-body">
-              <Card.Title className="employee-name">
+          >            
+            <Card.Body className={styles.cardBody}>
+              <Card.Title className={styles.employeeName}>
                 {emp.first_name} {emp.last_name}
               </Card.Title>
-              <Card.Subtitle className="employee-position">{emp.position}</Card.Subtitle>
-              <Card.Subtitle className="employee-department">{emp.department}</Card.Subtitle>
+              <Card.Subtitle className={styles.employeePosition}>{emp.position}</Card.Subtitle>
+              <Card.Subtitle className={styles.employeeDepartment}>{emp.department}</Card.Subtitle>
               <Button
                 variant="primary"
-                className="me-2 btn-edit"
+                className={styles.btnEdit}
                 onClick={(e) => {
                   e.stopPropagation();
                   navigate(`/employees/${emp._id}`);
                 }}
               >
-                <FontAwesomeIcon className='edit-icon' icon={faPenToSquare} />
+                <FontAwesomeIcon className={styles.editIcon} icon={faPenToSquare} />
               </Button>
               <Button
                 variant="danger"
-                className="btn-delete"
+                className={styles.btnDelete}
                 onClick={(e) => {
                   e.stopPropagation();
                   setSelectedDeleteEmployee(emp);
                   setModalDeleteShow(true);
                 }}
               >
-                <FontAwesomeIcon className='delete-icon' icon={faTrash} />
+                <FontAwesomeIcon className={styles.deleteIcon} icon={faTrash} />
               </Button>
             </Card.Body>
           </Card>
