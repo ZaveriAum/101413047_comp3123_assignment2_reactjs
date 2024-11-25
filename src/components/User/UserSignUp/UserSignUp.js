@@ -36,7 +36,7 @@ const UserSignUp = () => {
                 setAlert({
                     type: 'success',
                     heading: 'Sign Up Successful',
-                    message: `Hello ${result.data.user.username}, Welcome to Emage`,
+                    message: `Hello ${result.data.user.username} you have successfully signed up.`,
                     show: true,
                 });
                 setTimeout(() => {

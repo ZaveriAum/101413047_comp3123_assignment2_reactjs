@@ -70,6 +70,8 @@ const Employee = () => {
               setModalDetailsShow(true);
             }}
           >
+            <Card.Img variant="top" src="https://100k-faces.glitch.me/random-image" />
+            
             <Card.Body className="emp-body">
               <Card.Title className="employee-name">
                 {emp.first_name} {emp.last_name}

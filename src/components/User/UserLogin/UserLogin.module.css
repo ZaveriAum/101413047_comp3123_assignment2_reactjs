@@ -1,4 +1,4 @@
-.login-page {
+.loginPage {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -7,7 +7,7 @@
     margin: 0;
 }
 
-.login-box {
+.loginBox {
     background-color: #E4E0E1;
     padding: 2rem;
     width: 400px;
@@ -16,26 +16,28 @@
     text-align: center;
 }
 
-.login-title {
+.loginTitle {
     background-color: #E4E0E1;
     color: #493628;
     margin-bottom: 1rem;
 }
 
-.input-group {
+.inputGroup {
     display: flex;
     align-items: center;
     margin-bottom: 1rem;
     width: 100%;
+    background-color: #E4E0E1;
 }
 
-.input-icon {
+.inputIcon {
     width: 24px;
     height: 24px;
     margin: auto;
+    background-color: #E4E0E1;
 }
 
-.input-field {
+.inputField {
     width: 90%;
     padding: 0.5rem;
     background-color: #D6C0B3;
@@ -46,12 +48,12 @@
     display: inline-block;
 }
 
-.input-field:focus {
+.inputField:focus {
     outline: none;
     border: 1px solid #493628;
 }
 
-.login-button {
+.loginButton {
     width: 100%;
     padding: 0.5rem;
     background-color: #493628;
@@ -63,6 +65,6 @@
     margin-top: 1rem;
 }
 
-.login-button:hover {
+.loginButton:hover {
     background-color: #3e2f26;
 }

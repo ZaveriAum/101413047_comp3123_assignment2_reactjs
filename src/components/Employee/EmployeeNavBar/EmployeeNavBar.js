@@ -20,7 +20,7 @@ const EmployeeNavBar = () => {
 
     return (
         <Navbar className="container-fluid justify-content-between navbar" expand="lg">
-            <LinkContainer className='brand_c' to='/api/v1/employees'>
+            <LinkContainer className='brand_c' to='/employees'>
                 <Navbar.Brand className='brand'>
                     Emage
                 </Navbar.Brand>
