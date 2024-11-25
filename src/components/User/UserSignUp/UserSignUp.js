@@ -3,39 +3,82 @@ import './UserSignUp.css';
 import emailIcon from '../../../assets/envelope-fill.svg';
 import passwordIcon from '../../../assets/lock-fill.svg';
 import userIcon from '../../../assets/person-circle.svg';
-import axios from 'axios';
+import UserService from '../../../service/UserService'
 import { useNavigate } from 'react-router-dom';
+import CusAlert from '../../Util/Alert'
 
 const UserSignUp = () => {
     const navigate = useNavigate();
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [alert, setAlert] = useState({
+        type: '',
+        heading: '',
+        message: '',
+        show: false,
+      });
 
-    const handleSignUp = async (e) => {
+      const handleSignUp = async (e) => {
         e.preventDefault();
-
+    
         const userData = {
-            username: name,
-            email: email,
-            password: password
+          username: name,
+          email: email,
+          password: password,
         };
-
-        await axios.post('http://localhost:5000/api/v1/user/signup', userData)
-        .then((res)=>{
-            console.log(res)
-            alert(res.user.username + " welcome to Emage")
-            navigate('/login');
-        })
-        .catch((e)=>{
-            console.log(e)
-            alert("Error: " + e)
-        })
-    };
-
+    
+        try {
+          await UserService.signup(userData)
+          .then((result)=>{
+            console.log(result)
+            if(result.data.status){
+                setAlert({
+                    type: 'success',
+                    heading: 'Sign Up Successful',
+                    message: `Hello ${result.data.user.username}, Welcome to Emage`,
+                    show: true,
+                });
+                setTimeout(() => {
+                    navigate('/login');
+                }, 2000);
+            }else{
+                setAlert({
+                    type: 'danger',
+                    heading: 'Sign Up Unsccessful',
+                    message: `${result.data.message}`,
+                    show: true,
+                });
+                setTimeout(() => {
+                    navigate('/signup');
+                }, 2000);
+            }
+            })
+            .catch((e) => {
+                const errorMessage =
+                    e.response?.data?.message || e.response?.data?.errors[0]?.msg ||  e.message || 'An unexpected error occurred.';
+                setAlert({
+                    type: 'danger',
+                    heading: 'Unsuccessful',
+                    message: errorMessage,
+                    show: true,
+                });
+            });
+        }catch(e){
+            const errorMessage =
+                e.response?.data?.message || e.message || 'An unexpected error occurred.';
+            setAlert({
+                type: 'danger',
+                heading: 'Unsuccessful',
+                message: errorMessage,
+                show: true,
+            });
+        }
+    }
     return (
         <>
             <div className="signup-page">
+            
                 <div className="signup-box">
                     <h2 className="signup-title">Create your account</h2>
 
@@ -77,6 +120,13 @@ const UserSignUp = () => {
                     </button>
                 </div>
             </div>
+            <CusAlert
+                type={alert.type}
+                heading={alert.heading}
+                message={alert.message}
+                show={alert.show}
+                onClose={() => setAlert({ ...alert, show: false })}
+            />
         </>
     );
 };
