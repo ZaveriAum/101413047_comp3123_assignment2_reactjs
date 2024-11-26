@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const apiClient = axios.create({
-    baseURL: 'http://localhost:5000', // backend server
+    baseURL: process.env.REACT_APP_API_URL, // backend server
     withCredentials: true, // allows cookies form localhost:5000 -> backend
 });
 
