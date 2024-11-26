@@ -9,6 +9,11 @@ import apiClient from '../client/apiClient'
     async login(payload){
         const response = await apiClient.post('/api/v1/user/login', payload);
         return response
+    },
+
+    async logout(){
+        const response = await apiClient.get('/api/v1/user/logout')
+        return response
     }
 }
 

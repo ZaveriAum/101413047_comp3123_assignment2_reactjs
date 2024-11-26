@@ -66,7 +66,7 @@ const UserSignUp = () => {
             });
         }catch(e){
             const errorMessage =
-                e.response?.data?.message || e.message || 'An unexpected error occurred.';
+            e.response?.data?.message || e.response?.data?.errors[0]?.msg ||  e.message || 'An unexpected error occurred.';
             setAlert({
                 type: 'danger',
                 heading: 'Unsuccessful',

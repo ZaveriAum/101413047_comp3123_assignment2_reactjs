@@ -3,7 +3,7 @@ import apiClient from '../client/apiClient';
 const EmployeeService = {
 
   async getEmployees() {
-    const response = await apiClient.get('/api/v1/emp/employees');
+    const response = await apiClient.get('/api/v1/emp/employees', {withCredentials: true});
     return response;
   },
 

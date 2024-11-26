@@ -5,9 +5,11 @@ import passwordIcon from '../../../assets/lock-fill.svg';
 import { useNavigate } from 'react-router-dom';
 import UserService from '../../../service/UserService';
 import CusAlert from '../../Util/Alert';
+import {useAuth} from '../../../context/AuthContext'
 
 const UserLogin = () => {
     const navigate = useNavigate();
+    const { login } = useAuth();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [alert, setAlert] = useState({
@@ -28,17 +30,22 @@ const UserLogin = () => {
         try {
             await UserService.login(userData)
             .then((result)=>{
-              console.log(result)
               if(result.data.status){
-                  setAlert({
-                      type: 'success',
-                      heading: 'Logged in Successfully',
-                      message: `Hello ${result.data.user.username}, Welcome to Emage`,
-                      show: true,
-                  });
-                  setTimeout(() => {
-                      navigate('/employees');
-                  }, 2000);
+                const user = {
+                    username: result.data.user.username,
+                    email: result.data.user.email,
+                  };
+      
+                  login(user);
+                setAlert({
+                    type: 'success',
+                    heading: 'Logged in Successfully',
+                    message: `Hello ${result.data.user.username}, Welcome to Emage`,
+                    show: true,
+                });
+                setTimeout(() => {
+                    navigate('/employees');
+                }, 2000);
               }else{
                   setAlert({
                       type: 'danger',
@@ -63,7 +70,7 @@ const UserLogin = () => {
               });
           }catch(e){
               const errorMessage =
-                  e.response?.data?.message || e.message || 'An unexpected error occurred.';
+              e.response?.data?.message || e.response?.data?.errors[0]?.msg ||  e.message || 'An unexpected error occurred.';
               setAlert({
                   type: 'danger',
                   heading: 'Unsuccessful',
