@@ -36,7 +36,7 @@ const UserLogin = () => {
                     email: result.data.user.email,
                   };
       
-                  login(user);
+                login(user);
                 setAlert({
                     type: 'success',
                     heading: 'Logged in Successfully',
@@ -49,12 +49,12 @@ const UserLogin = () => {
               }else{
                   setAlert({
                       type: 'danger',
-                      heading: 'Sign Up Unsccessful',
+                      heading: 'Login Up Unsccessful',
                       message: `${result.data.message}`,
                       show: true,
                   });
                   setTimeout(() => {
-                      navigate('/signup');
+                      navigate('/login');
                   }, 2000);
               }
               })
@@ -78,6 +78,7 @@ const UserLogin = () => {
                   show: true,
               });
           }
+          
         }
     return (
         <>

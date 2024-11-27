@@ -73,7 +73,7 @@ const EmployeeNavBar = () => {
         <Navbar className="container-fluid justify-content-between navbar" expand="lg">
             <LinkContainer className='brand_c' to='/employees'>
                 <Navbar.Brand className='brand'>
-                    Emage
+                    EmagePro
                 </Navbar.Brand>
             </LinkContainer>
             <Nav className='logt'>

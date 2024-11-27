@@ -18,7 +18,8 @@ const Employee = () => {
   const [modalDeleteShow, setModalDeleteShow] = useState(false);
 
   useEffect(() => {
-    EmployeeService.getEmployees()
+    let token = localStorage.getItem("token")
+    EmployeeService.getEmployees(token)
       .then((res) => {
         setEmployee(res.data.employees);
       })

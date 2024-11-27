@@ -7,7 +7,8 @@ import apiClient from '../client/apiClient'
     },
 
     async login(payload){
-        const response = await apiClient.post('/api/v1/user/login', payload);
+        const response = await apiClient.post('/api/v1/user/login', payload, {withCredentials:true});
+        localStorage.setItem("token", response.data.token)
         return response
     },
 
