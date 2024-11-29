@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import EmployeeService from '../../../service/EmployeeService';
 import './EmployeeCreate.css';
+import CusAlert from '../../Util/Alert'
 
 const EmployeeCreate = () => {
   const navigate = useNavigate();
@@ -12,6 +13,12 @@ const EmployeeCreate = () => {
   const [position, setPosition] = useState('');
   const [department, setDepartment] = useState('');
   const [salary, setSalary] = useState('');
+  const [alert, setAlert] = useState({
+    type: '',
+    heading: '',
+    message: '',
+    show: false,
+  }); 
 
   const handleCreate = async (e) => {
     e.preventDefault();
@@ -28,9 +35,30 @@ const EmployeeCreate = () => {
 
     try {
       let token = localStorage.getItem("token")
-      const res = await EmployeeService.createEmployees(payload, token);
-      alert(res.data.status);
-      navigate('/employees');
+      await EmployeeService.createEmployees(payload, token)
+      .then((response)=>{
+        if(response.data.status){
+            setAlert({
+                type: 'Success',
+                heading: 'Employee Created Successfully',
+                message: `${response.data.employee.first_name} created successfully.`,
+                show: true,
+            });
+            setTimeout(() => {
+                navigate('/employees');
+            }, 2000);
+        }else{
+            setAlert({
+                type: 'danger',
+                heading: 'Employee Creation Unsccessful \nPlease try again',
+                message: `${response.data.message}`,
+                show: true,
+            });
+            setTimeout(() => {
+                navigate('/employees');
+            }, 2000);
+        }
+      }).catch(e=>alert(e.status))
     } catch (e) {
       alert(e.data.status);
     }
@@ -94,6 +122,13 @@ const EmployeeCreate = () => {
         />
         <button type="submit">Create</button>
       </form>
+      <CusAlert
+                type={alert.type}
+                heading={alert.heading}
+                message={alert.message}
+                show={alert.show}
+                onClose={() => setAlert({ ...alert, show: false })}
+      />
     </div>
   );
 };

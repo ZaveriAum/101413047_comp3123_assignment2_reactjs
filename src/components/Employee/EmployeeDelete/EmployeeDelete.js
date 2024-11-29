@@ -1,23 +1,43 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import EmployeeService from '../../../service/EmployeeService';
 import './EmployeeDelete.css';
+import CusAlert from '../../Util/Alert'
 
 const EmployeeDeleteModal = ({ employee, show, onHide, onEmployeeDeleted }) => {
+  const [alert, setAlert] = useState({
+    type: '',
+    heading: '',
+    message: '',
+    show: false,
+  });
+  
   if (!employee) return null;
 
-  const handleDelete = (e) => {
+  const handleDelete = async (e) => {
     e.stopPropagation();
     let token = localStorage.getItem("token")
-    EmployeeService.deleteEmployee(employee._id, token)
-      .then(() => {
+    await EmployeeService.deleteEmployee(employee._id, token)
+      setAlert({
+          type: 'Success',
+          heading: 'Deleted Successfully',
+          message: `${employee.username} deleted successfully signed up.`,
+          show: true,
+      });
+      setTimeout(() => {
         onHide();
+        setAlert({
+          type: 'Success',
+          heading: 'Deleted Successfully',
+          message: `${employee.username} deleted successfully signed up.`,
+          show: false,
+      });
         onEmployeeDeleted();
-      })
-      .catch((e) => console.log(e));
+      }, 2000);
   };
 
   return (
+    <>
     <Modal size="lg" aria-labelledby="contained-modal-title-vcenter" centered show={show} onHide={onHide} className="employee-delete-modal">
       <Modal.Header closeButton className="modal-header">
         <Modal.Title id="contained-modal-title-vcenter" className="modal-title">
@@ -36,6 +56,14 @@ const EmployeeDeleteModal = ({ employee, show, onHide, onEmployeeDeleted }) => {
         <Button variant="danger" onClick={handleDelete} className="delete-button">Delete</Button>
       </Modal.Footer>
     </Modal>
+    <CusAlert
+      type={alert.type}
+      heading={alert.heading}
+      message={alert.message}
+      show={alert.show}
+      onClose={() => setAlert({ ...alert, show: false })}
+    />
+    </>
   );
 };
 

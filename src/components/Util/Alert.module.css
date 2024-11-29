@@ -1,11 +1,37 @@
-.alertbody, .alertheading, .alertmessage{
-    background-color: #f8d7da;
+.alertbody {
+    position: fixed;      
+    bottom: 20px;         
+    right: 20px;          
+    width: 300px;         
+    padding: 10px;
+    z-index: 9999;        
+    background-color: #f8d7da; 
+    border-radius: 5px;   
+    color: #721c24;       
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    animation: slideIn 0.5s ease-out;
 }
 
-.alertbody{
-    width: 400px;
-    bottom: 700px;
-    left: 1100px;
-    position: absolute;
-    background-color: #f8d7da;
+.alertheading {
+    font-size: 18px;
+    margin-bottom: 8px;
+    font-weight: bold;
+    background-color: #f8d7da; 
+}
+
+.alertmessage {
+    font-size: 14px;
+    margin-bottom: 0;
+    background-color: #f8d7da; 
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }

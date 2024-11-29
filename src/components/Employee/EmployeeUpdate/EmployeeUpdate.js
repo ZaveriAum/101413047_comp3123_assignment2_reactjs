@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import EmployeeService from '../../../service/EmployeeService';
 import './EmployeeUpdate.css';
+import CusAlert from '../../Util/Alert'
 
 function EmployeeUpdate() {
     const {eid} = useParams()
@@ -13,11 +14,17 @@ function EmployeeUpdate() {
     const [position, setPosition] = useState()
     const [department, setDepartment] = useState()
     const [salary, setSalary] = useState()
+    const [alert, setAlert] = useState({
+      type: '',
+      heading: '',
+      message: '',
+      show: false,
+    });
 
 
     const getEmployeeDetails = async ()=>{
       let token = localStorage.getItem("token")
-      EmployeeService.getEmployee(eid, token)
+      await EmployeeService.getEmployee(eid, token)
       .then((employee)=>{
           const emp = employee.data.employee
           setFirstName(emp.first_name)
@@ -50,8 +57,27 @@ function EmployeeUpdate() {
         let token = localStorage.getItem("token")
         EmployeeService.updateEmployees(eid, payload, token)
         .then((response)=>{
-            alert(response.data.status)
-            navigate('/employees')
+          if(response.data.status){
+              setAlert({
+                  type: 'Success',
+                  heading: 'Update Successful',
+                  message: `${response.data.employee.first_name} updated successfully signed up.`,
+                  show: true,
+              });
+              setTimeout(() => {
+                  navigate('/employees');
+              }, 2000);
+          }else{
+              setAlert({
+                  type: 'danger',
+                  heading: 'Update Unsccessful',
+                  message: `${response.data.message}`,
+                  show: true,
+              });
+              setTimeout(() => {
+                  navigate('/employees');
+              }, 2000);
+          }
         })
         .catch(e=>alert(e.status))
     }
@@ -109,6 +135,13 @@ function EmployeeUpdate() {
         />
         <button type="submit">Update</button>
       </form>
+      <CusAlert
+                type={alert.type}
+                heading={alert.heading}
+                message={alert.message}
+                show={alert.show}
+                onClose={() => setAlert({ ...alert, show: false })}
+      />
     </div>
   );
 }
