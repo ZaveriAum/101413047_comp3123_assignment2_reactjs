@@ -27,7 +27,8 @@ const EmployeeCreate = () => {
     };
 
     try {
-      const res = await EmployeeService.createEmployees(payload);
+      let token = localStorage.getItem("token")
+      const res = await EmployeeService.createEmployees(payload, token);
       alert(res.data.status);
       navigate('/employees');
     } catch (e) {

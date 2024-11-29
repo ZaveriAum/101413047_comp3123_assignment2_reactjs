@@ -8,7 +8,8 @@ const EmployeeDeleteModal = ({ employee, show, onHide, onEmployeeDeleted }) => {
 
   const handleDelete = (e) => {
     e.stopPropagation();
-    EmployeeService.deleteEmployee(employee._id)
+    let token = localStorage.getItem("token")
+    EmployeeService.deleteEmployee(employee._id, token)
       .then(() => {
         onHide();
         onEmployeeDeleted();

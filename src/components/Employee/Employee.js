@@ -28,15 +28,17 @@ const Employee = () => {
 
   const search = (e) => {
     e.preventDefault();
-    EmployeeService.searchEmployees(query)
+    let token = localStorage.getItem("token")
+    EmployeeService.searchEmployees(query, token)
       .then((res) => {
         setEmployee(res.data.employees);
       })
       .catch((e) => console.log(e));
   };
 
-  const refreshEmployeeList = () => {
-    EmployeeService.getEmployees()
+  const refreshEmployeeList = async () => {
+    let token = localStorage.getItem("token")
+    await EmployeeService.getEmployees(token)
       .then((res) => {
         setEmployee(res.data.employees);
       })

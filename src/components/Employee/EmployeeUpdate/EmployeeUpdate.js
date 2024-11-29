@@ -16,18 +16,19 @@ function EmployeeUpdate() {
 
 
     const getEmployeeDetails = async ()=>{
-        EmployeeService.getEmployee(eid)
-        .then((employee)=>{
-            const emp = employee.data.employee
-            setFirstName(emp.first_name)
-            setLastName(emp.last_name)
-            setEmail(emp.email)
-            setPosition(emp.position)
-            setDepartment(emp.department)
-            setSalary(emp.salary)
-            setDetailsAdded(true)
-        })
-        .catch(e=>console.log(e))
+      let token = localStorage.getItem("token")
+      EmployeeService.getEmployee(eid, token)
+      .then((employee)=>{
+          const emp = employee.data.employee
+          setFirstName(emp.first_name)
+          setLastName(emp.last_name)
+          setEmail(emp.email)
+          setPosition(emp.position)
+          setDepartment(emp.department)
+          setSalary(emp.salary)
+          setDetailsAdded(true)
+      })
+      .catch(e=>console.log(e))
     }
 
     useEffect(()=>{
