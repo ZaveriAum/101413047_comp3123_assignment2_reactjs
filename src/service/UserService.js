@@ -12,10 +12,6 @@ import apiClient from '../client/apiClient'
         return response
     },
 
-    async logout(){
-        const response = await apiClient.get('/api/v1/user/logout')
-        return response
-    }
 }
 
 export default UserService

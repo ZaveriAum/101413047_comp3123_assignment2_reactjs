@@ -3,7 +3,6 @@ import { Navbar, Nav } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import './EmployeeNavBar.css'
 import { useNavigate } from 'react-router-dom';
-import UserService from '../../../service/UserService'
 import CusAlert from '../../Util/Alert'
 import { useAuth } from '../../../context/AuthContext';
 
@@ -21,42 +20,17 @@ const EmployeeNavBar = () => {
         e.preventDefault();
 
         try {
-            await UserService.logout()
-            .then((result)=>{
-              console.log(result)
-              if(result.data.status){
-                logout()
-                setAlert({
-                    type: 'success',
-                    heading: 'Logout Successful',
-                    message: `Thank you for using EmagePro`,
-                    show: true,
-                });
-                setTimeout(() => {
-                    navigate('/');
-                }, 2000);
-              }else{
-                  setAlert({
-                      type: 'danger',
-                      heading: 'logout Unsccessful',
-                      message: `${result.data.message}`,
-                      show: true,
-                  });
-                  setTimeout(() => {
-                      navigate('/employees');
-                  }, 2000);
-              }
-              })
-              .catch((e) => {
-                  const errorMessage =
-                      e.response?.data?.message || e.response?.data?.errors[0]?.msg ||  e.message || 'An unexpected error occurred.';
-                  setAlert({
-                      type: 'danger',
-                      heading: 'Unsuccessful',
-                      message: errorMessage,
-                      show: true,
-                  });
-              });
+            logout()
+            localStorage.removeItem("token")
+            setAlert({
+                type: 'success',
+                heading: 'Logout Successful',
+                message: `Thank you for using EmagePro`,
+                show: true,
+            });
+            setTimeout(() => {
+                navigate('/');
+            }, 2000);
           }catch(e){
               const errorMessage =
               e.response?.data?.message || e.response?.data?.errors[0]?.msg ||  e.message || 'An unexpected error occurred.';

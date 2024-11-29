@@ -47,8 +47,8 @@ function EmployeeUpdate() {
             "department":department,
             "salary":salary
         }
-        console.log(payload)
-        EmployeeService.updateEmployees(eid, payload)
+        let token = localStorage.getItem("token")
+        EmployeeService.updateEmployees(eid, payload, token)
         .then((response)=>{
             alert(response.data.status)
             navigate('/employees')
