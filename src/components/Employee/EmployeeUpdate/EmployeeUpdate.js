@@ -54,6 +54,7 @@ function EmployeeUpdate() {
             "department":department,
             "salary":salary
         }
+        try{
         let token = localStorage.getItem("token")
         EmployeeService.updateEmployees(eid, payload, token)
         .then((response)=>{
@@ -79,9 +80,27 @@ function EmployeeUpdate() {
               }, 2000);
           }
         })
-        .catch(e=>alert(e.status))
+        .catch(e=>{
+          const errorMessage =
+                e.response?.data?.message || e.response?.data?.errors[0]?.msg ||  e.message || 'An unexpected error occurred.';
+                setAlert({
+                    type: 'danger',
+                    heading: 'Unsuccessful',
+                    message: errorMessage,
+                    show: true,
+                });
+        })
+      }catch(e){
+        const errorMessage =
+          e.response?.data?.message || e.response?.data?.errors[0]?.msg ||  e.message || 'An unexpected error occurred.';
+          setAlert({
+              type: 'danger',
+              heading: 'Unsuccessful',
+              message: errorMessage,
+              show: true,
+          });
+      }
     }
-
 
   return (
     <div className="form-container">

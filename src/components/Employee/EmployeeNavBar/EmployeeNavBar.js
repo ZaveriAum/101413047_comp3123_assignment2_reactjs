@@ -1,7 +1,7 @@
 import {useState} from 'react'
 import { Navbar, Nav } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
-import './EmployeeNavBar.css'
+import styles from './EmployeeNavBar.module.css'
 import { useNavigate } from 'react-router-dom';
 import CusAlert from '../../Util/Alert'
 import { useAuth } from '../../../context/AuthContext';
@@ -44,15 +44,15 @@ const EmployeeNavBar = () => {
     };
 
     return (
-        <Navbar className="container-fluid justify-content-between navbar" expand="lg">
-            <LinkContainer className='brand_c' to='/employees'>
-                <Navbar.Brand className='brand'>
+        <Navbar className={styles.navbar} expand="lg">
+            <LinkContainer className={styles.brandC} to='/employees'>
+                <Navbar.Brand className={styles.brand}>
                     EmagePro
                 </Navbar.Brand>
             </LinkContainer>
-            <Nav className='logt'>
+            <Nav className={styles.logt}>
                 <LinkContainer to="/">
-                    <Nav.Link onClick={handleLogout} className='logout'>
+                    <Nav.Link onClick={handleLogout} className={styles.logout}>
                         Logout
                     </Nav.Link>
                 </LinkContainer>

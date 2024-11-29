@@ -1,0 +1,26 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    border-radius: 5px;
+    margin: 1rem;
+    padding: 1rem;
+    background-color: #E4E0E1;
+}
+
+.brand {
+    padding-left: 5rem;
+    background-color: #E4E0E1;
+}
+
+.login,
+.signup {
+    background-color: #E4E0E1;
+}
+
+.navlinks {
+    padding-right: 5rem;
+}
+
+.navlinks {
+    background-color: #E4E0E1;
+}

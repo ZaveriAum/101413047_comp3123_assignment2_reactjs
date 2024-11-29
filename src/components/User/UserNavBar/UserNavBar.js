@@ -1,23 +1,23 @@
 import { Navbar, Nav } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
-import './UserNavBar.css'
+import styles from './UserNavBar.module.css'
 
 function UserNavBar() {
     return (
-        <Navbar className="container-fluid justify-content-between navbar" expand="lg">
+        <Navbar className={styles.navbar} expand="lg">
             <LinkContainer to='/'>
-                <Navbar.Brand className='brand'>
+                <Navbar.Brand className={styles.brand}>
                     EmagePro
                 </Navbar.Brand>
             </LinkContainer>
-            <Nav className='navlinks'>
+            <Nav className={styles.navlinks}>
                 <LinkContainer to="/login">
-                    <Nav.Link className='login'>
+                    <Nav.Link className={styles.login}>
                         Login
                     </Nav.Link>
                 </LinkContainer>
                 <LinkContainer to="/signup">
-                    <Nav.Link className='signup'>
+                    <Nav.Link className={styles.signup}>
                         SignUp
                     </Nav.Link>
                 </LinkContainer>

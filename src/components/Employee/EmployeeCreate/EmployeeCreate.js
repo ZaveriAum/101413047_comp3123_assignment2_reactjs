@@ -58,9 +58,25 @@ const EmployeeCreate = () => {
                 navigate('/employees');
             }, 2000);
         }
-      }).catch(e=>alert(e.status))
+      }).catch(e=>{
+        const errorMessage =
+              e.response?.data?.message || e.response?.data?.errors[0]?.msg ||  e.message || 'An unexpected error occurred.';
+              setAlert({
+                  type: 'danger',
+                  heading: 'Unsuccessful',
+                  message: errorMessage,
+                  show: true,
+              });
+      })
     } catch (e) {
-      alert(e.data.status);
+      const errorMessage =
+      e.response?.data?.message || e.response?.data?.errors[0]?.msg ||  e.message || 'An unexpected error occurred.';
+      setAlert({
+          type: 'danger',
+          heading: 'Unsuccessful',
+          message: errorMessage,
+          show: true,
+      });
     }
   };
 
