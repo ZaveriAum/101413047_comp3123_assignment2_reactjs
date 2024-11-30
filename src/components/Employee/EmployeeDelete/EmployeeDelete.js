@@ -21,7 +21,7 @@ const EmployeeDeleteModal = ({ employee, show, onHide, onEmployeeDeleted }) => {
       setAlert({
           type: 'Success',
           heading: 'Deleted Successfully',
-          message: `${employee.username} deleted successfully signed up.`,
+          message: `${employee.first_name} deleted successfully signed up.`,
           show: true,
       });
       setTimeout(() => {
