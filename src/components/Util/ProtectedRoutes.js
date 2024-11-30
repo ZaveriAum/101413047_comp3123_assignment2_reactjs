@@ -1,16 +1,12 @@
-import { Outlet, useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
-import { useAuth } from '../../context/AuthContext';
+import { Outlet, Navigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 export default function ProtectedRoutes() {
   const { user } = useAuth();
-  const navigate = useNavigate();
 
-  useEffect(() => {
-    if (!user) {
-      navigate('/');
-    }
-  }, [user, navigate]);
+  if (user === null) {
+    return <Navigate to="/" />;
+  }
 
-  return user ? <Outlet /> : null;
+  return <Outlet />;
 }

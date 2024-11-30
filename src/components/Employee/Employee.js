@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Card, InputGroup, Form } from 'react-bootstrap';
+import { Card, InputGroup, Form } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faTrash, faMagnifyingGlass, faSquarePlus } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
@@ -49,9 +49,9 @@ const Employee = () => {
     <div className={styles.empBody}>
       <h1 className={styles.heading}>User Dashboard</h1>
       <div className={styles.searchContainer}>
-        <Button onClick={() => navigate(`/employees/create`)} className={styles.btnAdd}>
+        <button onClick={() => navigate(`/employees/create`)} className={styles.btnAdd}>
           <FontAwesomeIcon className={styles.addIcon} icon={faSquarePlus} />
-        </Button>
+        </button>
         <InputGroup className={styles.searchGroup}>
           <Form.Control
             type="text"
@@ -59,9 +59,9 @@ const Employee = () => {
             placeholder="Search employees..."
             className={styles.searchInput}
           />
-          <Button onClick={(e) => search(e)} className={styles.btnSearch}>
+          <button onClick={(e) => search(e)} className={styles.btnSearch}>
             <FontAwesomeIcon className={styles.searchIcon} icon={faMagnifyingGlass} />
-          </Button>
+          </button>
         </InputGroup>
       </div>
       <div className={styles.employeeCards}>
@@ -80,7 +80,7 @@ const Employee = () => {
               </Card.Title>
               <Card.Subtitle className={styles.employeePosition}>{emp.position}</Card.Subtitle>
               <Card.Subtitle className={styles.employeeDepartment}>{emp.department}</Card.Subtitle>
-              <Button
+              <button
                 variant="primary"
                 className={styles.btnEdit}
                 onClick={(e) => {
@@ -89,8 +89,8 @@ const Employee = () => {
                 }}
               >
                 <FontAwesomeIcon className={styles.editIcon} icon={faPenToSquare} />
-              </Button>
-              <Button
+              </button>
+              <button
                 variant="danger"
                 className={styles.btnDelete}
                 onClick={(e) => {
@@ -100,7 +100,7 @@ const Employee = () => {
                 }}
               >
                 <FontAwesomeIcon className={styles.deleteIcon} icon={faTrash} />
-              </Button>
+              </button>
             </Card.Body>
           </Card>
         ))}

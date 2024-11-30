@@ -25,9 +25,8 @@
   background-color: #D6C0B3;
 }
 
-.btnAdd:hover{
-  transform: scale(1.01);
-  background-color: #D6C0B3;
+.addIcon:hover, .searchIcon:hover{
+  transform: scale(1.1);
 }
 
 .btnAdd {
@@ -73,16 +72,12 @@
   margin-left: 10px;
 }
 
-.btnSearch:hover, .btnSearch:hover .searchIcon {
-  background-color: #E4E0E1;
-}
-
 .employeeCards {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
   gap: 15px;
   padding: 5px;
-  margin-left: 25px;
   border-radius: 5px !important;
 }
 
@@ -96,7 +91,6 @@
 
  .btnDelete:hover, .btnDelete:hover .deleteIcon, .btnEdit:hover, .btnEdit:hover .editIcon {
   transform: scale(1.05);
-  background-color: #E4E0E1;
 }
 
 .cardBody{
